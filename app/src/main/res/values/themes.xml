@@ -1,8 +1,16 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
     <style name="Base.Theme.AppCalculator" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/calc_accent</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/calc_accent_soft</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorSurface">@color/calc_surface</item>
+        <item name="colorOnSurface">@color/calc_text_primary</item>
+        <item name="colorBackground">@color/calc_background</item>
+        <item name="colorOnBackground">@color/calc_text_primary</item>
+        <item name="android:statusBarColor">@color/calc_background</item>
+        <item name="android:navigationBarColor">@color/calc_background</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
     </style>
 
     <style name="Theme.AppCalculator" parent="Base.Theme.AppCalculator" />
