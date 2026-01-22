@@ -1,6 +1,8 @@
 package com.example.appcalculator;
 
 import android.os.Bundle;
+import android.view.HapticFeedbackConstants;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -30,9 +32,11 @@ public class MainActivity extends AppCompatActivity {
 
         TextView expressionView = findViewById(R.id.text_expression);
         TextView resultView = findViewById(R.id.text_result);
+        TextView historyView = findViewById(R.id.text_history);
 
         viewModel.getExpression().observe(this, expressionView::setText);
         viewModel.getResult().observe(this, resultView::setText);
+        viewModel.getHistory().observe(this, historyView::setText);
 
         bindDigitButton(viewModel, R.id.button_0, "0");
         bindDigitButton(viewModel, R.id.button_1, "1");
@@ -45,29 +49,50 @@ public class MainActivity extends AppCompatActivity {
         bindDigitButton(viewModel, R.id.button_8, "8");
         bindDigitButton(viewModel, R.id.button_9, "9");
 
-        findViewById(R.id.button_decimal).setOnClickListener(v -> viewModel.onDecimal());
-        findViewById(R.id.button_plus).setOnClickListener(v -> viewModel.onOperator("+", "+"));
-        findViewById(R.id.button_minus).setOnClickListener(v -> viewModel.onOperator("−", "-"));
-        findViewById(R.id.button_multiply).setOnClickListener(v -> viewModel.onOperator("×", "*"));
-        findViewById(R.id.button_divide).setOnClickListener(v -> viewModel.onOperator("÷", "/"));
-        findViewById(R.id.button_percent).setOnClickListener(v -> viewModel.onPercent());
-        findViewById(R.id.button_power).setOnClickListener(v -> viewModel.onOperator("^", "^"));
+        bindButton(R.id.button_decimal, () -> viewModel.onDecimal());
+        bindButton(R.id.button_plus, () -> viewModel.onOperator("+", "+"));
+        bindButton(R.id.button_minus, () -> viewModel.onOperator("−", "-"));
+        bindButton(R.id.button_multiply, () -> viewModel.onOperator("×", "*"));
+        bindButton(R.id.button_divide, () -> viewModel.onOperator("÷", "/"));
+        bindButton(R.id.button_percent, () -> viewModel.onPercent());
+        bindButton(R.id.button_power, () -> viewModel.onOperator("^", "^"));
 
-        findViewById(R.id.button_sin).setOnClickListener(v -> viewModel.onFunction("sin", "sin"));
-        findViewById(R.id.button_cos).setOnClickListener(v -> viewModel.onFunction("cos", "cos"));
-        findViewById(R.id.button_tan).setOnClickListener(v -> viewModel.onFunction("tan", "tan"));
-        findViewById(R.id.button_ln).setOnClickListener(v -> viewModel.onFunction("ln", "ln"));
-        findViewById(R.id.button_log).setOnClickListener(v -> viewModel.onFunction("log", "log"));
-        findViewById(R.id.button_sqrt).setOnClickListener(v -> viewModel.onFunction("√", "sqrt"));
-        findViewById(R.id.button_pi).setOnClickListener(v -> viewModel.onPi());
+        bindButton(R.id.button_sin, () -> viewModel.onFunction("sin", "sin"));
+        bindButton(R.id.button_cos, () -> viewModel.onFunction("cos", "cos"));
+        bindButton(R.id.button_tan, () -> viewModel.onFunction("tan", "tan"));
+        bindButton(R.id.button_ln, () -> viewModel.onFunction("ln", "ln"));
+        bindButton(R.id.button_log, () -> viewModel.onFunction("log", "log"));
+        bindButton(R.id.button_sqrt, () -> viewModel.onFunction("√", "sqrt"));
+        bindButton(R.id.button_pi, () -> viewModel.onPi());
 
-        findViewById(R.id.button_ac).setOnClickListener(v -> viewModel.onAllClear());
-        findViewById(R.id.button_plus_minus).setOnClickListener(v -> viewModel.onBackspace());
-        findViewById(R.id.button_equals).setOnClickListener(v -> viewModel.onEquals());
+        bindButton(R.id.button_ac, () -> viewModel.onAllClear());
+        bindButton(R.id.button_plus_minus, () -> viewModel.onBackspace());
+        bindButton(R.id.button_equals, () -> viewModel.onEquals());
     }
 
     private void bindDigitButton(CalculatorViewModel viewModel, int buttonId, String digit) {
+        bindButton(buttonId, () -> viewModel.onDigit(digit));
+    }
+
+    private void bindButton(int buttonId, Runnable action) {
         Button button = findViewById(buttonId);
-        button.setOnClickListener(v -> viewModel.onDigit(digit));
+        button.setOnClickListener(v -> {
+            v.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP);
+            animateButton(v);
+            action.run();
+        });
+    }
+
+    private void animateButton(View view) {
+        view.animate()
+                .scaleX(0.96f)
+                .scaleY(0.96f)
+                .setDuration(80)
+                .withEndAction(() -> view.animate()
+                        .scaleX(1f)
+                        .scaleY(1f)
+                        .setDuration(80)
+                        .start())
+                .start();
     }
 }

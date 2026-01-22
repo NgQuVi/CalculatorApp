@@ -224,6 +224,13 @@ public class ExpressionEvaluator {
             case "tan":
                 stack.push(fromDouble(Math.tan(popRequired(stack, function).doubleValue())));
                 break;
+            case "cot":
+                double tanValue = Math.tan(popRequired(stack, function).doubleValue());
+                if (tanValue == 0) {
+                    throw new IllegalArgumentException("Division by zero.");
+                }
+                stack.push(fromDouble(1 / tanValue));
+                break;
             case "log":
                 BigDecimal logValue = popRequired(stack, function);
                 if (logValue.compareTo(BigDecimal.ZERO) <= 0) {
