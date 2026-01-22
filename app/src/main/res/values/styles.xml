@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Widget.AppCalculator.Button" parent="Widget.Material3.Button">
+        <item name="android:background">@drawable/bg_button_primary</item>
+        <item name="android:foreground">?attr/selectableItemBackgroundBorderless</item>
+        <item name="android:textColor">@color/calc_text_primary</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:insetLeft">0dp</item>
+        <item name="android:insetRight">0dp</item>
+        <item name="android:padding">12dp</item>
+        <item name="cornerRadius">16dp</item>
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+
+    <style name="Widget.AppCalculator.Button.Secondary">
+        <item name="android:background">@drawable/bg_button_secondary</item>
+        <item name="android:textColor">@color/calc_text_secondary</item>
+    </style>
+
+    <style name="Widget.AppCalculator.Button.Operator">
+        <item name="android:background">@drawable/bg_button_operator</item>
+        <item name="android:textColor">@color/calc_text_primary</item>
+    </style>
+
+    <style name="Widget.AppCalculator.Button.Accent">
+        <item name="android:background">@drawable/bg_button_accent</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+</resources>
