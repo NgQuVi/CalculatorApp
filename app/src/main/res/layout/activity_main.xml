@@ -40,6 +40,27 @@
             android:textColor="@color/calc_text_primary"
             android:textSize="40sp"
             android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/text_history_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="end"
+            android:text="History"
+            android:textColor="@color/calc_text_secondary"
+            android:textSize="12sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/text_history"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="start"
+            android:gravity="end"
+            android:maxLines="3"
+            android:textColor="@color/calc_text_secondary"
+            android:textSize="12sp"/>
     </LinearLayout>
 
     <LinearLayout
