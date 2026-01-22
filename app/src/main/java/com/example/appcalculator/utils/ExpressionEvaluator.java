@@ -231,6 +231,13 @@ public class ExpressionEvaluator {
                 }
                 stack.push(fromDouble(Math.log10(logValue.doubleValue())));
                 break;
+            case "ln":
+                BigDecimal lnValue = popRequired(stack, function);
+                if (lnValue.compareTo(BigDecimal.ZERO) <= 0) {
+                    throw new IllegalArgumentException("Ln domain error.");
+                }
+                stack.push(fromDouble(Math.log(lnValue.doubleValue())));
+                break;
             case "sqrt":
                 BigDecimal sqrtValue = popRequired(stack, function);
                 if (sqrtValue.compareTo(BigDecimal.ZERO) < 0) {
