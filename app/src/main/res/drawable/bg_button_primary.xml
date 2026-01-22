@@ -2,13 +2,13 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:top="4dp">
         <shape android:shape="rectangle">
-            <solid android:color="@color/calc_button_shadpw"/>
+            <solid android:color="@color/calc_button_shadow"/>
             <corners android:radius="16dp"/>
         </shape>
     </item>
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="@color/calc_button_priamry"/>
+            <solid android:color="@color/calc_button_primary"/>
             <corners android:radius="16dp"/>
         </shape>
     </item>
